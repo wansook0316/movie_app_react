@@ -1,38 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
+import axios from "axios";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("hello");
-  }
   state = {
-    count: 0
+    isLoading: true,
+    movies: []
   };
-  add = () => {
-    this.setState(current => ({ count: current.count + 1 }));
+  getMovies = async () => {
+    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
   };
-  minus = () => {
-    this.setState(current => ({ count: current.count - 1 }));
-  };
-  componentDidMount() {
-    console.log("render");
-  }
-  componentDidUpdate() {
-    console.log("im updated!");
-  }
-  componentWillUnmount() {
-    console.log("goodbuy");
+
+  componentWillMount() {
+    this.getMovies();
   }
   render() {
-    console.log("rendering");
-    return (
-      <div>
-        <h1>The number is : {this.state.count}</h1>
-        <button onClick={this.add}>Add</button>
-        <button onClick={this.minus}>Minus</button>
-      </div>
-    );
+    // this.state 객체 안에 있는 멤버변수 isLoading을 찾아서 그것의 값을 자바스크립트 변수 isLoading 안에 넣어라
+    const { isLoading } = this.state;
+    return <div>{isLoading ? "Loading..." : "we are ready"}</div>;
   }
 }
 
