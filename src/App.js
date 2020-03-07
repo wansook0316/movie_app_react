@@ -11,7 +11,7 @@ function App() {
       <Navigation /> {/* 이 component는 HashRouter 안에 있어야 한다. */}
       <Route path="/" exact={true} component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/movie-detail" component={Detail} />
+      <Route path="/movie/:id" component={Detail} />
     </HashRouter>
   );
 }
